@@ -4,13 +4,13 @@
 
 /*
     Input values:
-    hari m vinayagam chitra
-    vinayagam m annamalai boosanam
-    athai_p1 f annamalai boosanam
-    girl1 f mama_p1 athai_p1
-    chitra f pandurangam selvi
-    mama_m1 m pandurangam selvi
-    girl2 f mama_m1 mammy_m1
+    boy m father mother
+    father m grandfather_p grandmother_p
+    aunt_p1 f grandfather_p grandmother_p
+    girl_1 f uncle_p1 aunt_p1
+    mother f grandfather_m grandmother_m
+    uncle_m1 m grandfather_m grandmother_m
+    girl_2 f uncle_m1 aunt_m1
 */
 struct Person {
     char name[15];
