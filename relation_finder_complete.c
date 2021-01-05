@@ -4,14 +4,19 @@
 
 /*
     Input values:
-    boy m father mother
-    father m grandfather_p grandmother_p
-    aunt_p1 f grandfather_p grandmother_p
-    girl_1 f uncle_p1 aunt_p1
-    mother f grandfather_m grandmother_m
-    uncle_m1 m grandfather_m grandmother_m
-    girl_2 f uncle_m1 aunt_m1
+        boy m father mother
+        father m grandfather_p grandmother_p
+        aunt_p1 f grandfather_p grandmother_p
+        aunt_p2 f grandfather_p grandmother_p
+        girl_1 f uncle_p1 aunt_p1
+        girl_2 f uncle_p1 aunt_p1
+        girl_3 f uncle_p2 aunt_p2
+        mother f grandfather_m grandmother_m
+        uncle_m1 m grandfather_m grandmother_m
+        girl_4 f uncle_m1 aunt_m1
+        girl_5 f uncle_m1 aunt_m1
 */
+
 struct Person {
     char name[15];
     int isMale;
@@ -29,18 +34,18 @@ struct Person {
     struct Person *daughters[10];
 };
 
-struct Population {
-    char name[30];
-    struct Person *person;
-};
-
-struct Population populations[100]; 
+struct Person *populations[100]; 
 int noOfMembers=0;
+
+void addToDB(struct Person *person) {
+    populations[noOfMembers] = person;
+    noOfMembers++;
+}
 
 struct Person* searchPerson(char personName[30]) {
     for(int i=0; i<noOfMembers; i++) {
-        if(strcmp(personName, populations[i].name)==0) {
-            return populations[i].person;
+        if(strcmp(personName, populations[i]->name)==0) {
+            return populations[i];
         } 
     }
     return NULL;
@@ -58,15 +63,22 @@ struct Person* getPerson(char name[30]) {
 
     strcpy(person->name, name);
 
-    strcpy(populations[noOfMembers].name, name);
-    populations[noOfMembers].person = person;
-    noOfMembers++;
+    addToDB(person);
 
     return person;
 }
 
-void setSiblings(struct Person *person, struct Person *brothers[10], int noOfBrothers, struct Person *sisters[10], int noOfSisters) {
+void setChild(struct Person *parent, struct Person *child) {
+    if(child->isMale) {
+        parent->sons[parent->noOfSons] = child;
+        parent->noOfSons++;
+    } else {
+        parent->daughters[parent->noOfDaughters] = child;
+        parent->noOfDaughters++;
+    }
+}
 
+void setBrothers(struct Person *person, struct Person *brothers[10], int noOfBrothers) {
     for(int i=0; i<noOfBrothers; i++) {
         struct Person *brother = brothers[i];
         person->brothers[i] = brother;
@@ -79,7 +91,9 @@ void setSiblings(struct Person *person, struct Person *brothers[10], int noOfBro
         }
     }
     person->noOfBro = noOfBrothers;
+}
 
+void setSisters(struct Person *person, struct Person *sisters[10], int noOfSisters) {
     for(int i=0; i<noOfSisters; i++) {
         struct Person *sister = sisters[i];
         person->sisters[i] = sister;
@@ -92,27 +106,23 @@ void setSiblings(struct Person *person, struct Person *brothers[10], int noOfBro
         }
     }
     person->noOfSis = noOfSisters;
-}
+} 
 
 void setParents(struct Person* person, char fatherName[30], char motherName[30]) {
     struct Person *father = getPerson(fatherName);
     struct Person *mother = getPerson(motherName);
+    
     father->spouse = mother;
     mother->spouse = father;
     
-    setSiblings(person, father->sons, father->noOfSons, father->daughters, father->noOfDaughters);
-    if(person->isMale) {
-        father->sons[father->noOfSons] = person;
-        mother->sons[mother->noOfSons] = person;
-        father->noOfSons = mother->noOfSons = (father->noOfSons + 1);
-    } else {
-        father->daughters[father->noOfDaughters] = person;
-        mother->daughters[mother->noOfDaughters] = person;
-        father->noOfDaughters = mother->noOfDaughters = (father->noOfDaughters + 1);
-    }
-
     person->father = father;
     person->mother = mother;
+
+    setBrothers(person, father->sons, father->noOfSons);
+    setSisters(person, father->daughters, father->noOfDaughters);
+
+    setChild(mother, person);
+    setChild(father, person);
 }
 
 void addPerson(char name[30], int isMale, char fatherName[30], char motherName[30]) {
@@ -132,7 +142,7 @@ void printPerson(struct Person* person) {
 
 void printPopulation() {
     for(int i=0; i<noOfMembers; i++) {
-        printPerson(populations[i].person);
+        printPerson(populations[i]);
     }
 }
 
@@ -151,20 +161,27 @@ void listSons(struct Person *person) {
 void listMarriageableCousins(struct Person *person) {
     if(person->father!=NULL && person->mother!=NULL) {
         printf("list of %s's marriageable cousins...\n", person->name);
+
         if(person->isMale){
+
             for(int i=0; i<person->father->noOfSis; i++) {
                 listDaughters(person->father->sisters[i]);
             }
+
             for(int i=0; i<person->mother->noOfBro; i++) {
                 listDaughters(person->mother->brothers[i]);
             }
+
         } else {
+            
             for(int i=0; i<person->father->noOfSis; i++) {
                 listSons(person->father->sisters[i]);
             }
+
             for(int i=0; i<person->mother->noOfBro; i++) {
                 listSons(person->mother->brothers[i]);
             }
+
         }
         printf("\n");
     }
@@ -174,10 +191,14 @@ int main() {
     addPerson("boy", 1, "father", "mother");
     addPerson("father", 1, "grandfather_p", "grandmother_p");
     addPerson("aunt_p1", 0, "grandfather_p", "grandmother_p");
+    addPerson("aunt_p2", 0, "grandfather_p", "grandmother_p");
     addPerson("girl_1", 0, "uncle_p1", "aunt_p1");
+    addPerson("girl_2", 0, "uncle_p1", "aunt_p1");
+    addPerson("girl_3", 0, "uncle_p2", "aunt_p2");
     addPerson("mother", 0, "grandfather_m", "grandmother_m");
     addPerson("uncle_m1", 1, "grandfather_m", "grandmother_m");
-    addPerson("girl_2", 0, "uncle_m1", "aunt_m1");
+    addPerson("girl_4", 0, "uncle_m1", "aunt_m1");
+    addPerson("girl_5", 0, "uncle_m1", "aunt_m1");
     // printPopulation();
 
     listMarriageableCousins(searchPerson("boy"));
@@ -186,11 +207,12 @@ int main() {
 
 /*
     Output:
-
- *   list of boy's marriageable cousins...
- *   girl_1
- *   girl_2
-
+       list of boy's marriageable cousins...
+       girl_1
+       girl_2
+       girl_3
+       girl_4
+       girl_5
 */
 
 
