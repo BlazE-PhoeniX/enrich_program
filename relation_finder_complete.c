@@ -8,13 +8,17 @@
         father m grandfather_p grandmother_p
         aunt_p1 f grandfather_p grandmother_p
         aunt_p2 f grandfather_p grandmother_p
+        uncle_p3 m grandfather_p grandmother_p
         girl_1 f uncle_p1 aunt_p1
         girl_2 f uncle_p1 aunt_p1
         girl_3 f uncle_p2 aunt_p2
+        girl_4 f uncle_p3 aunt_p3
         mother f grandfather_m grandmother_m
         uncle_m1 m grandfather_m grandmother_m
-        girl_4 f uncle_m1 aunt_m1
+        aunt_m2 f grandfather_m grandmother_m
         girl_5 f uncle_m1 aunt_m1
+        girl_6 f uncle_m1 aunt_m1
+        girl_7 f uncle_m2 aunt_m2
 */
 
 struct Person {
@@ -192,13 +196,17 @@ int main() {
     addPerson("father", 1, "grandfather_p", "grandmother_p");
     addPerson("aunt_p1", 0, "grandfather_p", "grandmother_p");
     addPerson("aunt_p2", 0, "grandfather_p", "grandmother_p");
+    addPerson("uncle_p3", 1, "grandfather_p", "grandmother_p");
     addPerson("girl_1", 0, "uncle_p1", "aunt_p1");
     addPerson("girl_2", 0, "uncle_p1", "aunt_p1");
     addPerson("girl_3", 0, "uncle_p2", "aunt_p2");
+    addPerson("girl_4", 0, "uncle_p3", "aunt_p3");
     addPerson("mother", 0, "grandfather_m", "grandmother_m");
     addPerson("uncle_m1", 1, "grandfather_m", "grandmother_m");
-    addPerson("girl_4", 0, "uncle_m1", "aunt_m1");
+    addPerson("aunt_m2", 0, "grandfather_m", "grandmother_m");
     addPerson("girl_5", 0, "uncle_m1", "aunt_m1");
+    addPerson("girl_6", 0, "uncle_m1", "aunt_m1");
+    addPerson("girl_7", 0, "uncle_m2", "aunt_m2");
     // printPopulation();
 
     listMarriageableCousins(searchPerson("boy"));
@@ -211,8 +219,8 @@ int main() {
        girl_1
        girl_2
        girl_3
-       girl_4
        girl_5
+       girl_6
 */
 
 
