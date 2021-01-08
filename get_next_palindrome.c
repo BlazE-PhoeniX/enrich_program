@@ -24,6 +24,7 @@ int getNextPalindrome(int number) {
 
 int main() {
     int number, palindromeNo;
+    
     printf("Enter a number: ");
     scanf("%d", &number);
     
