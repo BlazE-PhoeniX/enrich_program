@@ -10,7 +10,6 @@ int reverseNo(int number) {
     return reverse;
 }
 
-
 int checkPalindrome(int number) {
     return number==reverseNo(number);
 }
