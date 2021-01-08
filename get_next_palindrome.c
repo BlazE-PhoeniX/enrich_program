@@ -21,6 +21,8 @@ int getNextPalindrome(int number) {
     return number;
 }
 
+
+
 int main() {
     int number, palindromeNo;
     printf("Enter a number: ");
