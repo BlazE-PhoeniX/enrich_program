@@ -14,6 +14,7 @@ int checkPalindrome(int number) {
     return number==reverseNo(number);
 }
 
+
 int getNextPalindrome(int number) {
     while(!checkPalindrome(number)) {
         number++;
