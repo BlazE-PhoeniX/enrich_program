@@ -56,7 +56,6 @@ long int getNextPalindrome(long int number) {
     formPalindrome(numberArr, digitCount);
 
     long int palindromeNo = joinNumberArr(numberArr, digitCount);
-
     if(palindromeNo < number) {
         incrementMiddleMembers(numberArr, digitCount);
         palindromeNo = joinNumberArr(numberArr, digitCount); 
