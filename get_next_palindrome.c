@@ -1,8 +1,8 @@
 #include<stdio.h>
 #include<string.h>
 
-int reverseNo(int number) {
-    int reverse=0;
+long int reverseNo(long int number) {
+    long int reverse=0;
     while(number!=0) {
         reverse = reverse*10 + (number%10);
         number/=10;
@@ -10,12 +10,12 @@ int reverseNo(int number) {
     return reverse;
 }
 
-int checkPalindrome(int number) {
+int checkPalindrome(long int number) {
     return number==reverseNo(number);
 }
 
 
-int getNextPalindrome(int number) {
+long int getNextPalindrome(long int number) {
     while(!checkPalindrome(number)) {
         number++;
     }
@@ -23,11 +23,11 @@ int getNextPalindrome(int number) {
 }
 
 int main() {
-    int number, palindromeNo;
+    long int number, palindromeNo;
     
     printf("Enter a number: ");
-    scanf("%d", &number);
+    scanf("%ld", &number);
     
     palindromeNo=getNextPalindrome(number);
-    printf("Next Palindrome number = %d\n\n", palindromeNo);
+    printf("Next Palindrome number = %ld\n\n", palindromeNo);
 }

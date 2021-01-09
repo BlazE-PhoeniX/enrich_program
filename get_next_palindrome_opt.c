@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 
-int getDigitCount(int number) {
+int getDigitCount(long int number) {
     int count=0;
     while(number!=0) {
         count++;
@@ -28,23 +28,24 @@ void incrementMiddleMembers(short int numberArr[], int n) {
     numberArr[n/2 + i]++;
 }
 
-int joinNumberArr(short int numberArr[], int digitCount) {
-    int number=0;
+long int joinNumberArr(short int numberArr[], int digitCount) {
+    long int number=0;
     for(int i=0; i<digitCount; i++) {
         number = number*10 + numberArr[i];
     }
     return number;
 }
 
-void formPalindrome(short int numberArr[5], int n) {
+void formPalindrome(short int numberArr[], int n) {
     for(int i=0; i<n/2; i++){
         numberArr[n-i-1] = numberArr[i];
     }
 }
 
-int getNextPalindrome(int number) {
+long int getNextPalindrome(long int number) {
 
-    int temp = number, digitCount=getDigitCount(number);
+    long int temp = number;
+    int digitCount=getDigitCount(number);
     short int numberArr[digitCount];
 
     for(int i=digitCount-1; i>=0 && temp!=0; i--) {
@@ -54,7 +55,7 @@ int getNextPalindrome(int number) {
 
     formPalindrome(numberArr, digitCount);
 
-    int palindromeNo = joinNumberArr(numberArr, digitCount);
+    long int palindromeNo = joinNumberArr(numberArr, digitCount);
 
     if(palindromeNo < number) {
         incrementMiddleMembers(numberArr, digitCount);
@@ -65,8 +66,8 @@ int getNextPalindrome(int number) {
 }
 
 int main() {
-    int number;
+    long int number;
     printf("Enter a number: ");
-    scanf("%d", &number);
-    printf("Next Palindrome number = %d\n\n", getNextPalindrome(number));
+    scanf("%ld", &number);
+    printf("Next Palindrome number = %ld\n\n", getNextPalindrome(number));
 }
