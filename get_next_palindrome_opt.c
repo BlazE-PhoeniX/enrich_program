@@ -10,7 +10,7 @@ int getDigitCount(int number) {
     return count;
 }
 
-void incrementMiddleMembers(int numberArr[], int n) {
+void incrementMiddleMembers(short int numberArr[], int n) {
     if(n%2==0 || numberArr[n/2]==9) {
         int i=1;
         while(numberArr[n/2 - i] == 9) {
@@ -28,7 +28,7 @@ void incrementMiddleMembers(int numberArr[], int n) {
     numberArr[n/2 + i]++;
 }
 
-int joinNumberArr(int numberArr[], int digitCount) {
+int joinNumberArr(short int numberArr[], int digitCount) {
     int number=0;
     for(int i=0; i<digitCount; i++) {
         number = number*10 + numberArr[i];
@@ -36,7 +36,7 @@ int joinNumberArr(int numberArr[], int digitCount) {
     return number;
 }
 
-void formPalindrome(int numberArr[5], int n) {
+void formPalindrome(short int numberArr[5], int n) {
     for(int i=0; i<n/2; i++){
         numberArr[n-i-1] = numberArr[i];
     }
@@ -45,10 +45,10 @@ void formPalindrome(int numberArr[5], int n) {
 int getNextPalindrome(int number) {
 
     int temp = number, digitCount=getDigitCount(number);
-    int numberArr[digitCount];
+    short int numberArr[digitCount];
 
     for(int i=digitCount-1; i>=0 && temp!=0; i--) {
-        numberArr[i] = temp%10;
+        numberArr[i] = (short int) temp%10;
         temp/=10;
     }
 
