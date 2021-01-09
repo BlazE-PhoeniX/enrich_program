@@ -49,7 +49,7 @@ long int getNextPalindrome(long int number) {
     short int numberArr[digitCount];
 
     for(int i=digitCount-1; i>=0 && temp!=0; i--) {
-        numberArr[i] = (short int) temp%10;
+        numberArr[i] = temp%10;
         temp/=10;
     }
 
