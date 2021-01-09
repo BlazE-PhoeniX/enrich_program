@@ -11,10 +11,21 @@ int getDigitCount(int number) {
 }
 
 void incrementMiddleMembers(int numberArr[], int n) {
-    if(n%2==0) {
-        numberArr[n/2 - 1]++;
+    if(n%2==0 || numberArr[n/2]==9) {
+        int i=1;
+        while(numberArr[n/2 - i] == 9) {
+            numberArr[n/2 - i]=0;
+            i++;
+        }
+        numberArr[n/2 - i]++;
     } 
-    numberArr[n/2]++;
+
+    int i=0;
+    while(numberArr[n/2 +i] == 9) {
+        numberArr[n/2 +i] = 0;
+        i++;
+    }
+    numberArr[n/2 + i]++;
 }
 
 int joinNumberArr(int numberArr[], int digitCount) {
