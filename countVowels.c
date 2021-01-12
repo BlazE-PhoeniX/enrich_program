@@ -20,23 +20,27 @@ int checkVowel(char c) {
     }
 }
 
-int countVowels(char *word) {
+int countVowels(char word[]) {
     int noOfVowels = 0;
-    while(*word!='\n' || *word!='\0') {
-        if(checkVowel(*word)) {
+    
+    for(int index=0; word[index]!='\0'; index++) {
+        if(checkVowel(word[index])) {
             noOfVowels++;
         }
-        word++;
     }
 
     return noOfVowels;
 }
 
 int main() {
-    char word[20];
+    char word[100];
+    int noOfVowels;
 
     printf("Enter the word or sentence: \n");
     fgets(word, 100, stdin);
 
-    countVowels(word);
+    noOfVowels = countVowels(word);
+
+    printf("\nNumber of vowels: %d\n", noOfVowels);
+    return 0;
 }
