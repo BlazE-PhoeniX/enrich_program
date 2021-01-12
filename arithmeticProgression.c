@@ -3,8 +3,9 @@
 
 void generateArithmeticProgression(int progress[], int startValue, int diff, int length) {
     int temp = startValue;
-    for(int index=0; index<length; index++, temp+=diff) {
+    for(int index=0; index<length; index++) {
         progress[index] = temp;
+        temp+=diff;
     }
 }
 
