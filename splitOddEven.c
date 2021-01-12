@@ -4,7 +4,7 @@
 void splitArray(int array[], int n, int odd[], int *oddCount, int even[], int *evenCount) {
     *evenCount = *oddCount = 0;
     for(int i=0; i<n; i++) {
-        if(array[i]%2==0) {
+        if(array[i]%2!=0) {
             odd[*oddCount] = array[i];
             (*oddCount)++;
         } else {
