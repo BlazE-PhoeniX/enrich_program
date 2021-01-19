@@ -46,4 +46,6 @@ int main() {
 
     printf("Result string: %s\n\n", resultStr);
 
+    return 1;
+
 }
