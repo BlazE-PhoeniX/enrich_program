@@ -1,2 +1,3 @@
 # enrich_program
-programs discussed in the zoho enrichment program with date
+
+C coding challenges given in zoho enrich program
