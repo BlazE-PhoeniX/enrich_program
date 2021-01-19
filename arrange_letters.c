@@ -6,25 +6,18 @@ void arrangeStrings(char resultStr[], char str1[], char str2[]) {
 
     while(str1[str1Index] && str2[str2Index]) {
         if(str1[str1Index]<=str2[str2Index]) {
-            resultStr[index]=str1[str1Index];
-            str1Index++;
+            resultStr[index++]=str1[str1Index++];
         } else {
-            resultStr[index]=str2[str2Index];
-            str2Index++;
+            resultStr[index++]=str2[str2Index++];
         }
-        index++;
     }
 
     while(str1[str1Index]) {
-        resultStr[index]=str1[str1Index];
-        index++;
-        str1Index++;
+        resultStr[index++]=str1[str1Index++];
     }
     
     while(str2[str2Index]) {
-        resultStr[index]=str2[str2Index];
-        index++;
-        str2Index++;
+        resultStr[index++]=str2[str2Index++];
     }
 
     resultStr[index] = '\0';
