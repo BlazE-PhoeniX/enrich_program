@@ -4,7 +4,7 @@
 void arrangeStrings(char resultStr[], char str1[], char str2[]) {
     int index=0, str1Index=0, str2Index=0;
 
-    for(; str1[str1Index] && str2[str2Index]; index++) {
+    while(str1[str1Index] && str2[str2Index]) {
         if(str1[str1Index]<=str2[str2Index]) {
             resultStr[index]=str1[str1Index];
             str1Index++;
@@ -12,6 +12,7 @@ void arrangeStrings(char resultStr[], char str1[], char str2[]) {
             resultStr[index]=str2[str2Index];
             str2Index++;
         }
+        index++;
     }
 
     while(str1[str1Index]) {
