@@ -12,6 +12,7 @@
     girl2 f Tmama1 mammy1
 
 */
+
 struct Person {
     char name[30];
     int isMale;
